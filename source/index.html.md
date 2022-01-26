@@ -25,6 +25,13 @@ meta:
 
 # Introduction
 
+> > This style relies on nesting blockquotes and codeblocks inside a blockquote, allowing the outer blockquote to 
+> > serve as a label for the content. 
+> > Check `index.html.md` for examples!
+> 
+> Annotated blockquote and codeblocks:
+
+
 Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
 
 We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
@@ -33,33 +40,31 @@ This example API documentation page was created with [Slate](https://github.com/
 
 # Authentication
 
+>```ruby
+>require 'kittn'
+>
+>api = Kittn::APIClient.authorize!('meowmeowmeow')
+>```
+>
+>```python
+>import kittn
+>
+>api = kittn.authorize('meowmeowmeow')
+>```
+>
+>```shell
+># With shell, you can just pass the correct header with each request
+>curl "api_endpoint_here" \
+>  -H "Authorization: meowmeowmeow"
+>```
+
+>```javascript
+>const kittn = require('kittn');
+>
+>let api = kittn.authorize('meowmeowmeow');
+>```
+>
 > To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
 
 Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
 
@@ -75,52 +80,56 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 
 ## Get All Kittens
 
-```ruby
-require 'kittn'
+>```ruby
+>require 'kittn'
+>
+>api = Kittn::APIClient.authorize!('meowmeowmeow')
+>api.kittens.get
+>```
+>
+>```python
+>import kittn
+>
+>api = kittn.authorize('meowmeowmeow')
+>api.kittens.get()
+>```
+>
+>```shell
+>curl "http://example.com/api/kittens" \
+>  -H "Authorization: meowmeowmeow"
+>```
+>
+>```javascript
+>const kittn = require('kittn');
+>
+>let api = kittn.authorize('meowmeowmeow');
+>let kittens = api.kittens.get();
+>```
+>
+> Get All Kittens:
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
+<!-- This comments prevents the two blockquotes from being treated as one. -->
 
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
+>```json
+>[
+>  {
+>    "id": 1,
+>    "name": "Fluffums",
+>    "breed": "calico",
+>    "fluffiness": 6,
+>    "cuteness": 7
+>  },
+>  {
+>    "id": 2,
+>    "name": "Max",
+>    "breed": "unknown",
+>    "fluffiness": 5,
+>    "cuteness": 10
+>  }
+>]
+>```
+>
 > The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
 
 This endpoint retrieves all kittens.
 
@@ -141,43 +150,47 @@ Remember — a happy kitten is an authenticated kitten!
 
 ## Get a Specific Kitten
 
-```ruby
-require 'kittn'
+>```ruby
+>require 'kittn'
+>
+>api = Kittn::APIClient.authorize!('meowmeowmeow')
+>api.kittens.get(2)
+>```
+>
+>```python
+>import kittn
+>
+>api = kittn.authorize('meowmeowmeow')
+>api.kittens.get(2)
+>```
+>
+>```shell
+>curl "http://example.com/api/kittens/2" \
+>  -H "Authorization: meowmeowmeow"
+>```
+>
+>```javascript
+>const kittn = require('kittn');
+>
+>let api = kittn.authorize('meowmeowmeow');
+>let max = api.kittens.get(2);
+>```
+>
+> Get a specific kitten:
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
+<!-- This comments prevents the two blockquotes from being treated as one. -->
 
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
+>```json
+>{
+>  "id": 2,
+>  "name": "Max",
+>  "breed": "unknown",
+>  "fluffiness": 5,
+>  "cuteness": 10
+>}
+>```
+>
 > The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
 
 This endpoint retrieves a specific kitten.
 
@@ -195,41 +208,46 @@ ID | The ID of the kitten to retrieve
 
 ## Delete a Specific Kitten
 
-```ruby
-require 'kittn'
+>```ruby
+>require 'kittn'
+>
+>api = Kittn::APIClient.authorize!('meowmeowmeow')
+>api.kittens.delete(2)
+>```
+>
+>```python
+>import kittn
+>
+>api = kittn.authorize('meowmeowmeow')
+>api.kittens.delete(2)
+>```
+>
+>```shell
+>curl "http://example.com/api/kittens/2" \
+>  -X DELETE \
+>  -H "Authorization: meowmeowmeow"
+>```
+>
+>```javascript
+>const kittn = require('kittn');
+>
+>let api = kittn.authorize('meowmeowmeow');
+>let max = api.kittens.delete(2);
+>```
+>
+> Delete a specific kitten:
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
+<!-- This comments prevents the two blockquotes from being treated as one. -->
 
-```python
-import kittn
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -X DELETE \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
+>```json
+>{
+>  "id": 2,
+>  "deleted" : ":("
+>}
+>```
+>
 > The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
 
 This endpoint deletes a specific kitten.
 
