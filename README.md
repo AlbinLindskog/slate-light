@@ -11,4 +11,6 @@
 
 * **Nested blockquotes** — Markdown supports nesting blockquotes or codeblocks inside blockquote. This theme adds styling for this feature, and uses it to create labeled quotes or code snippets.
 
+* **Language selector** - The language selector is inserted next to each code example instead of being stuck at the top.
+
 The original Slate repo is available at [https://github.com/slatedocs/slate](https://github.com/slatedocs/slate).

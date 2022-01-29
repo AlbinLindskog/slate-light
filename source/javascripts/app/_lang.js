@@ -28,8 +28,7 @@ under the License.
     if (!language) return;
     if (language === "") return;
 
-    $(".lang-selector a").removeClass('active');
-    $(".lang-selector a[data-language-name='" + language + "']").addClass('active');
+    const sel = $(".lang-select select").val(language);
     for (var i=0; i < languages.length; i++) {
       $(".highlight.tab-" + languages[i]).hide();
       $(".lang-specific." + languages[i]).hide();
@@ -135,12 +134,28 @@ under the License.
   }
 
   function setupLanguages(l) {
+    languages = l;
+
+    // Generate language selector:
+    if (languages.length > 0) {
+      $('pre.highlight').prepend('<div class="lang-select"><select></select><svg xmlns="http://www.w3.org/2000/svg" width="18px" viewBox="0 0 24 24"><title>Change Language</title><path d="M11.591 9.992a1 1 0 1 1 1.416 1.415l-4.3 4.3a1 1 0 0 1-1.414 0l-4.3-4.3A1 1 0 0 1 4.41 9.992L8 13.583zm0-3.984L8 2.417 4.409 6.008a1 1 0 1 1-1.416-1.415l4.3-4.3a1 1 0 0 1 1.414 0l4.3 4.3a1 1 0 1 1-1.416 1.415z" fill-rule="evenodd"></path></svg></div>');
+      const sel = $(".lang-select select")
+      $(languages).each(function () {
+        sel.append($("<option>").attr('value', this).text(this));
+      });
+
+      // if we click on a language tab, activate that language:
+      sel.on("change", function() {
+        pushURL(this.value);
+        activateLanguage(this.value);
+        return false;
+      })
+    }
+
     var defaultLanguage = null;
     if (localStorage) {
       defaultLanguage = localStorage.getItem("language");
     }
-
-    languages = l;
 
     var presetLanguage = getLanguageFromQueryString();
     if (presetLanguage) {
@@ -158,14 +173,5 @@ under the License.
       activateLanguage(languages[0]);
     }
   }
-
-  // if we click on a language tab, activate that language
-  $(function() {
-    $(".lang-selector a").on("click", function() {
-      var language = $(this).data("language-name");
-      pushURL(language);
-      activateLanguage(language);
-      return false;
-    });
-  });
 })();
+
