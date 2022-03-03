@@ -1,4 +1,4 @@
-<h2 align="center">A light theme for of <a href="https://github.com/slatedocs/slate">Slate</a>.</h3>
+<h2 align="center">A light theme for <a href="https://github.com/slatedocs/slate">Slate</a>.</h3>
 
 <p align="center"><img src="https://raw.githubusercontent.com/AlbinLindskog/slate-light/main/screenshot.png" width=700 alt="Screenshot of Example Documentation created with Slate light"></p>
 
